@@ -18,6 +18,9 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12 (EMSProject)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="flatpickr" level="application" />
+    <orderEntry type="library" name="pikaday" level="application" />
+    <orderEntry type="library" name="clockpicker" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Event Analytics{% endblock %}
+{% block content %}
+<h1>Analytics for {{ event.title }}</h1>
+<p>Total Tickets Sold: {{ total_tickets }}</p>
+<p>Total RSVPs (Attending): {{ total_rsvps }}</p>
+<p>Average Rating: {{ avg_rating|default:"No feedback yet" }}</p>
+
+<h2>Feedback Comments:</h2>
+<ul>
+    {% for feedback in feedbacks %}
+    <li><strong>{{ feedback.user.username }}:</strong> {{ feedback.comment }} (Rating: {{ feedback.rating }})</li>
+    {% empty %}
+    <li>No feedback submitted yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

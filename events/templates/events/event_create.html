@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <!-- Pikaday CSS for the date picker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.css">
+  <!-- ClockPicker CSS for the time picker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css">
+{% endblock %}
+
+{% block content %}
+<h1>Create Event</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create Event</button>
+</form>
+{% endblock %}
+
+{% block extra_js %}
+  <!-- Include jQuery if it's not already loaded -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Pikaday JS for date picker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
+  <!-- ClockPicker JS for time picker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
+  <script>
+    // Initialize Pikaday on the date field
+    var picker = new Pikaday({
+        field: document.querySelector('.datepicker'),
+        format: 'YYYY-MM-DD'
+    });
+
+    // Initialize ClockPicker on the time field
+    $('.timepicker').clockpicker({
+        autoclose: true,
+        donetext: 'Done'
+    });
+  </script>
+{% endblock %}

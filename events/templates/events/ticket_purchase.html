@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Purchase Ticket{% endblock %}
+{% block content %}
+<h1>Purchase Ticket for {{ event.title }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="ticket_type">Ticket Type:</label>
+    <select name="ticket_type" id="ticket_type">
+        <option value="free">Free</option>
+        <option value="paid">Paid</option>
+    </select>
+    <button type="submit">Purchase Ticket</button>
+</form>
+{% endblock %}

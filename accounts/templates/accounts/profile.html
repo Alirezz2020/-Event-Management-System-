@@ -1,35 +1,71 @@
+{#{% extends "base.html" %}#}
+{#{% load static %}#}
+{##}
+{#{% block extra_css %}#}
+{#  <link rel="stylesheet" href="{% static 'css/styles.css' %}">#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<div class="profile-container text-center">#}
+{#  <div class="profile-image-container">#}
+{#    {% if object.profile_picture %}#}
+{#      <img id="profilePicture" src="{{ object.profile_picture.url }}" alt="Profile Picture" class="profile-picture">#}
+{#    {% else %}#}
+{#      <img id="profilePicture" src="{% static 'images/default_profile.png' %}" alt="Profile Picture" class="profile-picture">#}
+{#    {% endif %}#}
+{#  </div>#}
+{#  <div class="profile-details">#}
+{#    <h2>{{ object.first_name }} {{ object.last_name }}</h2>#}
+{##}
+{#  </div>#}
+{#  <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary btn-edit">Edit Profile</a>#}
+{#</div>#}
+{##}
+{#<!-- Modal for enlarged profile picture -->#}
+{#<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">#}
+{#  <div class="modal-dialog modal-dialog-centered">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-body">#}
+{#        <img id="modalProfileImage" src="" alt="Profile Picture" class="img-fluid">#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+{#{% endblock %}#}
+{##}
+{#{% block extra_js %}#}
+{#  <script src="{% static 'js/script.js' %}"></script>#}
+{#{% endblock %}#}
 {% extends "base.html" %}
 {% load static %}
 
 {% block extra_css %}
+  <!-- Custom CSS for profile card; you may move this into your global CSS -->
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="profile-container text-center">
-  <div class="profile-image-container">
+<div class="card profile-card">
+  <div class="card-image">
     {% if object.profile_picture %}
-      <img id="profilePicture" src="{{ object.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+      <img id="profilePicture" src="{{ object.profile_picture.url }}" alt="Profile Picture">
     {% else %}
-      <img id="profilePicture" src="{% static 'images/default_profile.png' %}" alt="Profile Picture" class="profile-picture">
+      <img id="profilePicture" src="{% static 'images/default_profile.png' %}" alt="Profile Picture">
     {% endif %}
   </div>
-  <div class="profile-details">
+  <div class="card-content">
     <h2>{{ object.first_name }} {{ object.last_name }}</h2>
-
+    <!-- Additional profile details can be added here -->
   </div>
-  <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary btn-edit">Edit Profile</a>
+  <div class="card-action">
+    <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+  </div>
 </div>
 
 <!-- Modal for enlarged profile picture -->
-<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-        <img id="modalProfileImage" src="" alt="Profile Picture" class="img-fluid">
-      </div>
-    </div>
-  </div>
+<div id="profileModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalProfileImage">
 </div>
 {% endblock %}
 

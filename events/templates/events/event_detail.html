@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}{{ event.title }} Details{% endblock %}
+{% block content %}
+<h1>{{ event.title }}</h1>
+<p>{{ event.description }}</p>
+<p><strong>Date:</strong> {{ event.date }} <strong>Time:</strong> {{ event.time }}</p>
+<p><strong>Venue:</strong> {{ event.venue.name }}, {{ event.venue.address }}</p>
+
+<hr>
+<h2>RSVP</h2>
+<form method="post" action="{% url 'events:submit_rsvp' event.id %}">
+    {% csrf_token %}
+    {{ rsvp_form.as_p }}
+    <button type="submit">Submit RSVP</button>
+</form>
+
+<hr>
+<h2>Ticket Purchase</h2>
+<form method="post" action="{% url 'events:purchase_ticket' event.id %}">
+    {% csrf_token %}
+    <label for="ticket_type">Ticket Type:</label>
+    <select name="ticket_type" id="ticket_type">
+        <option value="free">Free</option>
+        <option value="paid">Paid</option>
+    </select>
+    <button type="submit">Purchase Ticket</button>
+</form>
+
+<hr>
+<h2>Feedback</h2>
+<form method="post" action="{% url 'events:submit_feedback' event.id %}">
+    {% csrf_token %}
+    {{ feedback_form.as_p }}
+    <button type="submit">Submit Feedback</button>
+</form>
+
+<hr>
+<p><a href="{% url 'events:analytics' event.id %}">View Analytics</a></p>
+{% endblock %}
